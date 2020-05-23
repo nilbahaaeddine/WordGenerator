@@ -2,8 +2,10 @@ V:er==>N:age
 V:er==>N:ement
 V:er==>AGENT:eur
 V:er==>AGENT:euse
+V:er==>AGENT:ateur
 V:er==>LIEU:oire
 V:er==>LIEU:oir
+V:er==>LIEU:atoire
 V:er==>N:e
 V:er==>ADJ:ant
 V:er==>N:ette
