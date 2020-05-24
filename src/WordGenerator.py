@@ -3,6 +3,7 @@ import requests
 import io
 import itertools
 import random
+import sys
 
 from IPython.display import clear_output
 from bs4 import BeautifulSoup
@@ -110,7 +111,7 @@ for word in words_list1:
         words_list2.update(generate_dict(word, words_list1[word]))
 
 # Affichage des mots
-print('Les mots existants dans jeux de mots :')
+print('\nLes mots existants dans jeux de mots :')
 print_results(words_list2)
 
 # Mots en relation avec le mot de base
@@ -140,7 +141,7 @@ for word in words_list2:
             words_list3.update(generate_dict(word, words_list1[word]))
 
 # Affichage des mots
-print(f'Les mots existants dans jeux de mots qui sont en relation (r0) avec le mot : {testWord} :')
+print(f'\nLes mots existants dans jeux de mots qui sont en relation (r0) avec le mot : {testWord} :')
 print_results(words_list3)
 
 # Mots finaux
@@ -206,5 +207,5 @@ for f in words_list3:
                             words_list4.update(generate_dict(f, k))
 
 # Affichage des mots
-print('Les mots finaux sont :')
+print('\nLes mots finaux sont :')
 print_results(words_list4)
