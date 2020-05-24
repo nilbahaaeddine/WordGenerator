@@ -43,20 +43,28 @@ def generate_dict(key, value):
         dicot[key].append(value)
     return dicot
 
+# Type de natures
+nature = {'Verbe': 'V', 'Nom': 'N', 'Adjectif': 'ADJ', 'Nom propre': 'NP'}
+
 # L'utilisation du fichier en ligne de commande
 def usage():
-	print(f'python sys.argv[1] <mot> <nature_mot>')
-	sys.exit()
+    print(f'python sys.argv[1] <mot> <nature_mot>')
+    print(f'Veuillez choisir la nature du mot dans la liste ci-dessous :')
+    for (key, value) in nature.items():
+        print(f'\t{value} pour {key}')
+    sys.exit()
 
 if(len(sys.argv) != 3):
-	usage()
+    usage()
 
 # Déclarations des variables
-nature = {'Verbe': 'V', 'Nom': 'N', 'Adjectif': 'ADJ', 'Nom propre': 'NP'}
 rules = []
 words_list1 = {}
 testWord = sys.argv[1]
 natureWord = sys.argv[2]
+
+if(natureWord not in nature.values()):
+    usage()
 
 # Ouverture du fichier
 file = open("rules.txt", "r")
