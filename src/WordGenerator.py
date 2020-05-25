@@ -92,7 +92,7 @@ for rule in rules:
         words_list1.update(generate_dict(generatedWord, ruleD[0]))
 
 # Affichage des mots
-print(f'\nLes dérivations du mot : {testWord}')
+print(f'\nLes dérivations du mot \'{testWord}\' :')
 print_results(words_list1)
 
 # Affichage des règles
@@ -149,12 +149,11 @@ for word in words_list2:
             words_list3.update(generate_dict(word, words_list1[word]))
 
 # Affichage des mots
-print(f'\nLes mots existants dans jeux de mots qui sont en relation (r0) avec le mot : {testWord} :')
+print(f'\nLes mots existants dans jeux de mots qui sont en relation (r0) avec le mot \'{testWord}\' :')
 print_results(words_list3)
 
-# Mots finaux
 relation_map = {'AGENT': '13', 'LIEU' : '15', 'N': '4', 'V': '4', 'ADJ': '4', 'ADV': '4'}
-type_map = {'N': 'Nom:', 'V' : 'Ver:', 'ADJ' : 'Adj:'}
+type_map = {'N': 'Nom:', 'V' : 'Ver:', 'ADJ' : 'Adj:', 'ADV' : 'Adv:'}
 words_list4 = {}
 
 for f in words_list3:   
@@ -180,10 +179,10 @@ for f in words_list3:
                     a1 = line.split(';')[1]
                 if(re.match('e;.*;\'' + str(type_map[k]) + '\';.*;.*', line)):
                     a2 = line.split(';')[1]
-                if(a2):
-                    if(re.match('r;.*;' + a1 + ';' + a2 + ';4;.*', line)):
-                        if(int(line.split(';')[5]) > 0):
-                            words_list4.update(generate_dict(f, k))
+                if(re.match('r;.*;' + a1 + ';' + a2 + ';4;.*', line)):
+                    if(int(line.split(';')[5]) > 0):
+                        words_list4.update(generate_dict(f, k))
+                        break
         else:
             url = "http://www.jeuxdemots.org/rezo-dump.php?gotermsubmit=Chercher&gotermrel=" + str(testWord) + "&rel=" + str(relation_map[k])
 
@@ -203,17 +202,11 @@ for f in words_list3:
                     a1 = line.split(';')[1]
                 if(re.match('e;.*;\'' + f + '\';.*;.*', line)):
                     a2 = line.split(';')[1]
-
-                if(int(relation_map[k]) == 13):
-                    if(re.match('r;.*;' + a1 + ';' + a2 + ';13;.*', line)):
-                        if(int(line.split(';')[5]) > 0):
-                            words_list4.update(generate_dict(f, k))
-
-                if(int(relation_map[k]) == 15):
-                    if(re.match('r;.*;' + a1 + ';' + a2 + ';15;.*', line)):
-                        if(int(line.split(';')[5]) > 0):
-                            words_list4.update(generate_dict(f, k))
+                if(re.match('r;.*;' + a1 + ';' + a2 + ';' + relation_map[k] + ';.*', line)):
+                    if(int(line.split(';')[5]) > 0):
+                        words_list4.update(generate_dict(f, k))
+                        break
 
 # Affichage des mots
-print('\nLes mots finaux sont :')
+print('\tLes mots finaux sont :')
 print_results(words_list4)
